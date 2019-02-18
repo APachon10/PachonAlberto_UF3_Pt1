@@ -19,7 +19,7 @@ app.post('/login', function(req, res) {
   var i =0;
   for(i=0 ;i<diccionario.length;i++){
     console.log('Usuario '+diccionario[i].user);
-    if(username == diccionario[i].user && password == diccionario[i].pass){      
+    if(username == diccionario[i].user && password == diccionario[i].pass){
       res.send('Login Correcto ');
       return;
     }
@@ -30,13 +30,14 @@ app.post('/login', function(req, res) {
 app.get('/api/login/:username/:password',function(req,res){
   var i =0;
   for(i=0 ;i<diccionario.length;i++){
-    if(req.params.username == diccionario[i].user && req.params.password == diccionario[i].pass){      
+    if(req.params.username == diccionario[i].user && req.params.password == diccionario[i].pass){
       res.send('Bienvenido '+req.params.username);
       return;
     }
   }
   res.send("Login Incorrecto");
 });
+var port = process.env.port || 3000
 app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+  console.log('Example app listening on port 3000!' +port);
 });
