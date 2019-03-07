@@ -1,5 +1,5 @@
 var express = require('express');
-var app = express();
+var app = express();;
 
 var bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -39,5 +39,5 @@ app.get('/api/login/:username/:password',function(req,res){
 });
 var port = process.env.port || 3000;
 app.listen(port, function () {
-  console.log('Example app listening on port 3000!' +port);
+  console.log('Example app listening on port ' +port);
 });
