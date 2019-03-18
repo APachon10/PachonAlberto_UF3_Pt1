@@ -37,7 +37,7 @@ app.get('/api/login/:username/:password',function(req,res){
   }
   res.send("Login Incorrecto");
 });
-var port = process.env.port || 3000;
+var port = process.env.PORT || 3000;
 app.listen(port, function () {
   console.log('Example app listening on port ' +port);
 });
