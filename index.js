@@ -7,6 +7,12 @@ app.use(bodyParser.urlencoded({ extended: false }))
 var cors = require('cors');
 app.use(cors());
 
+const { Pool } = require('pg');
+const Conexion = new Conexion({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true
+});
+
 var diccionario = [{user:"Alberto",pass:"abc123"} ,
                   {user:"Sean",pass:"abc456"},
                   {user:"Miku",pass:"Miku10"} ];
@@ -44,6 +50,8 @@ app.get('/db', async (req, res)){
       const client = await pool.connect()
       const result = await client.query('SELECT * FROM test_table');
       const results = { 'results': (result) ? result.rows : null};
+      
+      var verificacion = JSON.stringify(results);
      
       client.release();
     } catch (err) {
