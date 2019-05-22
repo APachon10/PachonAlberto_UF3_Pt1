@@ -47,12 +47,11 @@ app.get('/api/login/:username/:password',function(req,res){
 });
 app.get('/db', async (req, res)){
     try {
-      const client = await pool.connect()
-      const result = await client.query('SELECT * FROM test_table');
-      const results = { 'results': (result) ? result.rows : null};
+      const Cliente = await pool.connect()
+      const Consulta = await client.query('SELECT * FROM users');
+      const Resultados = { 'results': (result) ? result.rows : null};
       
-      var verificacion = JSON.stringify(results);
-     
+      res.send(JSON.stringify(results['results']));
       client.release();
     } catch (err) {
       console.error(err);
