@@ -4,6 +4,9 @@ var app = express();
 var bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
 
+var cors = require('cors');
+app.use(cors());
+
 var diccionario = [{user:"Alberto",pass:"abc123"} ,
                   {user:"Sean",pass:"abc456"},
                   {user:"Miku",pass:"Miku10"} ];
@@ -36,6 +39,18 @@ app.get('/api/login/:username/:password',function(req,res){
   }
   res.send("Login Incorrecto");
 });
+app.get('/db', async (req, res)){
+    try {
+      const client = await pool.connect()
+      const result = await client.query('SELECT * FROM test_table');
+      const results = { 'results': (result) ? result.rows : null};
+     
+      client.release();
+    } catch (err) {
+      console.error(err);
+      res.send("Error " + err);
+    }
+}
 var port = process.env.PORT || 3000;
 app.listen(port, function () {
   console.log('Example app listening on port ' +port);
